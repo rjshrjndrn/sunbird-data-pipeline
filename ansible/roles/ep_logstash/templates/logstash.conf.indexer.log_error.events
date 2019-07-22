@@ -20,17 +20,24 @@ input {
             codec => "json"
     }
 }
-filter{
-        mutate { copy => { "eid" => "[@metadata][eid]" } }
-        mutate { lowercase => [ "[@metadata][eid]" ] }
-}
+
 output {
-  elasticsearch {
-    codec => "json"
-    hosts => ["{{logger_es}}"]
-    index => "%{[@metadata][eid]}-index"
-    document_type => "_doc"
-  }
+
+    if  [eid] =="ERROR"{
+          elasticsearch {
+                codec => "json"
+                hosts => ["{{logger_es}}"]
+                index => "error-index"
+                document_type => "_doc"
+          }
+    }else if [eid] =="LOG" {
+          elasticsearch {
+            codec => "json"
+            hosts => ["{{logger_es}}"]
+            index => "log-index"
+            document_type => "_doc"
+          }
+        }
 }
 
 
