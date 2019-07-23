@@ -28,14 +28,14 @@ output {
                 codec => "json"
                 hosts => ["{{logger_es}}"]
                 index => "error-index"
-                document_type => "_doc"
+                document_type => "events"
           }
     }else if [eid] =="LOG" {
           elasticsearch {
             codec => "json"
             hosts => ["{{logger_es}}"]
             index => "log-index"
-            document_type => "_doc"
+            document_type => "events"
           }
         }
 }
