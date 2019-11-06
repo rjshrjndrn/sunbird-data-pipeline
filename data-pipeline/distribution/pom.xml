@@ -9,7 +9,9 @@
         <artifactId>jobs</artifactId>
         <version>0.0.1</version>
     </parent>
-
+    <properties>
+        <jacoco.plugin.version>0.8.2</jacoco.plugin.version>
+    </properties>
     <artifactId>distribution</artifactId>
 
     <packaging>pom</packaging>
@@ -131,7 +133,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.2</version>
+                <version>${jacoco.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>report-aggregate</id>
