@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "secor.appConfigName" }}-config
+  name: {{ $.Release.Name }}-config
   namespace: {{ $.Values.secor_namespace }}
   labels:
     app: {{ template "secor.appConfigName" }}-config
@@ -10,6 +10,6 @@ metadata:
     release: {{ $.Release.Name }}
     heritage: {{ $.Release.Service }}
 data:
-{{- $secor_job_name := .Release.Name }}
-{{- (tpl ($.Files.Glob "config/*.properties").AsConfig $) | indent 2 -}}
+{{- $secor_job_name := $.Release.Name }}
+{{ (tpl ($.Files.Glob "config/*").AsConfig $ ) | indent 2 }}
 {{- end }}
